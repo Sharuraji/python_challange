@@ -38,23 +38,53 @@ with open(path_csv,"r") as file:
         
     for n in number_votes:
         vote_percent.append(round(n/total_votes*100,3))  
-    print(f"\n")
-    print("Election Result\n")
-    print(f"------------------------------\n")
-    print(f"Total votes : {total_votes}\n")
-    print(f"------------------------------\n")
 
+   
+    # find the winner candidate
+    candidate_max=max(zip(candidate_dict.values(),candidate_dict.keys()))
+    
+    # create a text file
+
+    filepath=os.path.join("PyPoll","analysis", "pypoll.txt")
+    file=open(filepath,"w")
+    file.write(f"\n")
+    print(f"\n")
+    file.write("Election Result\n")
+    print("Election Result\n")
+    file.write("------------------------------\n")
+    print(f"------------------------------\n")
+    file.write(f"Total votes : {total_votes}\n")
+    print(f"Total votes : {total_votes}\n")
+    file.write("------------------------------\n")
+    print(f"------------------------------\n")
     count = 0
     for key, value in candidate_dict.items():
         for percent, candidate in zip(vote_percent, candidate_dict):
+            file.write(f"{candidate} : {percent}% ({number_votes[count]})\n")
             print(f"{candidate} : {percent}% ({number_votes[count]})")
             count=count+1
         break
-
-    print("-----------------------------------")    
-    candidate_max=max(zip(candidate_dict.values(),candidate_dict.keys()))
-    print(f"Winner:  {candidate_max[1]}")
+    file.write("-----------------------------------\n")
     print("-----------------------------------") 
+    file.write(f"Winner:  {candidate_max[1]}\n")
+    print(f"Winner:  {candidate_max[1]}")
+    file.write("-----------------------------------")
+    print("-----------------------------------") 
+    file.close()
+
+    
+    
+    
+
+    
+    
+
+    
+
+      
+
+   
+    
 
 
  
